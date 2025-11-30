@@ -1,0 +1,16 @@
+{
+  "findings": [
+    {
+      "file": "index.html",
+      "message": "Change page title to 'Group Wedding Page'"
+    },
+    {
+      "file": "style.css", 
+      "message": "Update wedding theme colors and fonts"
+    },
+    {
+      "file": "script.js",
+      "message": "Add wedding gallery functionality"
+    }
+  ]
+}
