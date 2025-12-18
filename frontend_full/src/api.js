@@ -5,10 +5,11 @@ const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
 // Configure axios defaults
 axios.defaults.timeout = 30000;
 
-export const reviewCode = async (repoUrl, file) => {
+export const reviewCode = async (repoUrl, file, githubToken = '') => {
   const form = new FormData();
   form.append('repo_url', repoUrl);
   if (file) form.append('scan_report', file);
+  if (githubToken) form.append('github_token', githubToken);
   
   const res = await axios.post(`${API_BASE}/review`, form, {
     headers: { 'Content-Type': 'multipart/form-data' }

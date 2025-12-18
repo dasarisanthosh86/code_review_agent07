@@ -20,6 +20,10 @@ def clone_repo(url, dest_dir):
     """Clone GitHub repository"""
     dest = os.path.join(dest_dir, 'repo')
     
+    # Clean and validate URL
+    url = url.strip()  # Remove leading/trailing spaces
+    url = ' '.join(url.split())  # Remove extra spaces in middle
+    
     # Handle different URL formats
     if url.startswith('git@github.com:'):
         url = url.replace('git@github.com:', 'https://github.com/')
@@ -31,21 +35,24 @@ def clone_repo(url, dest_dir):
     Repo.clone_from(url, dest)
     return dest
 
-def push_new_repo(repo_path, original_repo_url):
+def push_new_repo(repo_path, original_repo_url, github_token=None):
     """Push changes to original repository"""
     push_enabled = os.getenv('PUSH_ENABLED', 'false').lower() == 'true'
     
+    # Use provided token or fall back to environment variable
+    token = github_token or GITHUB_TOKEN
+    
     print(f"Push enabled: {push_enabled}")
-    print(f"GitHub token exists: {'Yes' if GITHUB_TOKEN else 'No'}")
+    print(f"GitHub token exists: {'Yes' if token else 'No'}")
     print(f"GitHub user: {GITHUB_USER}")
     
-    if not push_enabled or not GITHUB_TOKEN or not GITHUB_USER:
-        print("Push disabled or missing credentials")
+    if not push_enabled or not token:
+        print("Push disabled or missing token")
         return original_repo_url
     
     try:
         # Initialize GitHub client
-        github = Github(GITHUB_TOKEN)
+        github = Github(token)
         user = github.get_user()
         
         print(f"Authenticated as: {user.login}")
@@ -69,7 +76,7 @@ def push_new_repo(repo_path, original_repo_url):
             return original_repo_url
         
         # Get authenticated URL for pushing
-        auth_url = original_repo_url.replace('https://github.com/', f'https://{GITHUB_TOKEN}@github.com/')
+        auth_url = original_repo_url.replace('https://github.com/', f'https://{token}@github.com/')
         if not auth_url.endswith('.git'):
             auth_url += '.git'
         

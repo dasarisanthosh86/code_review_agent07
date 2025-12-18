@@ -26,5 +26,11 @@ npm run dev
 
 ## Usage
 1. Enter GitHub repository URL
-2. Upload scan report (JSON)
-3. Get automated fixes and updated repository
+2. Enter your GitHub token (required for pushing fixes)
+3. Upload scan report (JSON)
+4. Get automated fixes and updated repository
+
+## GitHub Token
+You must provide your GitHub token via the UI form when submitting a review. The token is required to push automated fixes to your repository.
+
+**Note**: Your token is only used for the current request and is not stored.

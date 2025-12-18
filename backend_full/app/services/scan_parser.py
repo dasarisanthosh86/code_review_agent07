@@ -66,7 +66,28 @@ def parse_json(text: Optional[str]) -> Optional[Dict[str, List[str]]]:
         
         for f in findings:
             file = f.get("file") or f.get("file_path") or f.get("path") or f.get("location") or "main.py"
-            msg = f.get("message") or f.get("issue_description") or f.get("description") or f.get("title") or "Code issue"
+            
+            # Try multiple fields for issue description
+            msg = (f.get("issue") or f.get("message") or f.get("issue_description") or 
+                   f.get("description") or f.get("title"))
+            
+            # Add line number and severity if available
+            line = f.get("line")
+            severity = f.get("severity")
+            
+            if msg:
+                if line:
+                    msg = f"Line {line}: {msg}"
+                if severity:
+                    msg = f"[{severity}] {msg}"
+            else:
+                # If no message, try to extract from suggested_fix or original_code
+                suggested = f.get("suggested_fix", "")
+                original = f.get("original_code", "")
+                if suggested and original:
+                    msg = f"Code improvement: {original[:50]}... → {suggested[:50]}..."
+                else:
+                    msg = "Code quality improvement needed"
             
             if file not in issues:
                 issues[file] = []

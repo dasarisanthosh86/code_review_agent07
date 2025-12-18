@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 export default function UploadForm(){
   const [repo,setRepo]=useState('');
   const [file,setFile]=useState(null);
+  const [githubToken,setGithubToken]=useState('');
   const [loading,setLoading]=useState(false);
   const [progress,setProgress]=useState('');
   const [error,setError]=useState('');
@@ -27,13 +28,18 @@ export default function UploadForm(){
       return;
     }
     
+    if(!githubToken.trim()){
+      setError('Please enter your GitHub token to push fixes');
+      return;
+    }
+    
     setLoading(true);
     setError('');
     setProgress('🔄 Starting review process...');
     
     try{
-      console.log('Sending request:', repo, file);
-      const res=await reviewCode(repo,file);
+      console.log('Sending request:', repo, file, githubToken ? 'Token provided' : 'No token');
+      const res=await reviewCode(repo,file,githubToken);
       console.log('Response:', res);
       
       setTimeout(()=>{
@@ -55,6 +61,16 @@ export default function UploadForm(){
         onChange={e=>setRepo(e.target.value)}
         placeholder='https://github.com/user/repo'
         disabled={loading}
+      />
+      
+      <label>GitHub Token *</label>
+      <input 
+        type='password'
+        value={githubToken} 
+        onChange={e=>setGithubToken(e.target.value)}
+        placeholder='ghp_xxxxxxxxxxxx'
+        disabled={loading}
+        required
       />
       
       <label>Scan Report *</label>

@@ -1,0 +1,76 @@
+{
+  "issues": [
+    {
+      "file_path": "time.html",
+      "issue_description": "Missing DOCTYPE declaration - should be at the very top of the document",
+      "original_code": "<!DOCTYPE html>",
+      "suggested_fix": "Ensure DOCTYPE is the first line without any whitespace before it"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "Generic page title 'Time' - should be more descriptive for SEO",
+      "original_code": "<title>Time</title>",
+      "suggested_fix": "<title>Digital Clock - Real-Time Display</title>"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "Missing meta description tag for SEO optimization",
+      "original_code": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+      "suggested_fix": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<meta name=\"description\" content=\"A beautiful digital clock displaying real-time hours, minutes, and seconds\">"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "External CSS file 'style.css' referenced but may not exist - could cause 404 error",
+      "original_code": "<link rel=\"stylesheet\" href=\"style.css\">",
+      "suggested_fix": "Verify style.css exists or add inline styles as fallback"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "Missing alt attributes and ARIA labels for accessibility",
+      "original_code": "<div class=\"clock\">",
+      "suggested_fix": "<div class=\"clock\" role=\"timer\" aria-label=\"Digital clock display\">"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "Clock spans lack semantic meaning - should use time element",
+      "original_code": "<span id=\"hrs\">00</span>\n<span>:</span>\n<span id=\"min\">00</span>",
+      "suggested_fix": "<time datetime=\"00:00:00\">\n  <span id=\"hrs\">00</span>\n  <span>:</span>\n  <span id=\"min\">00</span>\n  <span>:</span>\n  <span id=\"sec\">00</span>\n</time>"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "Script tag should be in head with defer attribute for better performance",
+      "original_code": "<script src=\"script.js\"></script>",
+      "suggested_fix": "Move to <head>: <script src=\"script.js\" defer></script>"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "Missing favicon link - browser will make unnecessary 404 request",
+      "original_code": "<link rel=\"stylesheet\" href=\"style.css\">",
+      "suggested_fix": "<link rel=\"stylesheet\" href=\"style.css\">\n<link rel=\"icon\" href=\"favicon.ico\" type=\"image/x-icon\">"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "No noscript fallback - users with JavaScript disabled see nothing",
+      "original_code": "<script src=\"script.js\"></script>",
+      "suggested_fix": "<script src=\"script.js\"></script>\n<noscript>Please enable JavaScript to view the clock.</noscript>"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "Missing Open Graph meta tags for social media sharing",
+      "original_code": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+      "suggested_fix": "Add: <meta property=\"og:title\" content=\"Digital Clock\">\n<meta property=\"og:description\" content=\"Real-time digital clock display\">"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "Empty div with class 'hero' - unclear purpose, may be unnecessary wrapper",
+      "original_code": "<div class=\"hero\">\n  <div class=\"container\">",
+      "suggested_fix": "Consider removing unnecessary wrapper divs or add semantic HTML5 elements like <main> or <section>"
+    },
+    {
+      "file_path": "time.html",
+      "issue_description": "No error handling if script.js fails to load",
+      "original_code": "<script src=\"script.js\"></script>",
+      "suggested_fix": "<script src=\"script.js\" onerror=\"console.error('Failed to load script')\"></script>"
+    }
+  ]
+}
