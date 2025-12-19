@@ -17,7 +17,7 @@ GROQ_API_KEY = os.getenv('GROQ_API_KEY')
 if GOOGLE_API_KEY:
     try:
         genai.configure(api_key=GOOGLE_API_KEY)
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-1.5-flash')
         print("Gemini model initialized successfully")
     except Exception as e:
         print(f"Gemini init error: {e}")
